@@ -33,11 +33,12 @@
         /* --- SECTION 1: HERO --- */
         .hero-section {
             width: 100%;
+            /* height: max(100vh, 100%); */
             min-height: 100svh;
 
             background: linear-gradient(var(--overlay-dark), var(--overlay-dark)), 
                         url('./images/principal.jpg'); 
-            background-size: cover;
+            background-size: auto 100%;
             background-position: center;
             background-attachment: fixed;
             
@@ -250,10 +251,35 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.2rem; }
+            /* .hero-title { font-size: 2.2rem; } */
             .section-title { font-size: 2rem; }
             .grid-cards { grid-template-columns: 1fr; }
-            .location-badge { bottom: 20px; right: 20px; font-size: 0.85rem; }
+            /* .location-badge { bottom: 20px; right: 20px; font-size: 0.85rem; } */
+            
+            /* Réduire le padding de la section Hero pour gagner de la place */
+            .hero-section {
+                padding: 15px 15px 40px 15px !important; /* Moins de marge en haut/bas */
+            }
+
+            /* Réduire la taille du titre principal */
+            .hero-title {
+                font-size: 2rem !important; /* Passé de 3.5rem à 2rem */
+                margin-bottom: 0.5rem !important;
+            }
+
+            /* Réduire la taille de la description */
+            .hero-desc {
+                font-size: 0.95rem !important; /* Passé de 1.2rem à 0.95rem */
+                line-height: 1.4 !important;
+            }
+
+            /* Réduire la taille du badge de lieu */
+            .location-badge {
+                font-size: 0.7rem !important;
+                padding: 6px 10px !important;
+                bottom: 15px !important;
+                right: 15px !important;
+            }
             
             .footer-contact {
                 flex-direction: column;
