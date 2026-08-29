@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gardiens de Beaurepaire</title>
+    <style>
+        /* --- RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- COULEURS --- */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e67e22;
+            --bg-light: #f4f4f4;
+            --text-light: #fff;
+            --overlay-dark: rgba(0, 0, 0, 0.4);
+            --footer-bg: #2c3e50; /* Bleu foncé professionnel */
+            --footer-text: #ecf0f1; /* Blanc cassé pour lisibilité */
+        }
+
+        /* --- SECTION 1: HERO --- */
+        .hero-section {
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(var(--overlay-dark), var(--overlay-dark)), 
+                        url('./images/principal.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .location-badge {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* --- SECTION 2: ACTIONS --- */
+        .actions-section {
+            height: 100vh;
+            width: 100%;
+            background-color: var(--bg-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .actions-container {
+            max-width: 1200px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            text-align: left;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* --- SECTION 3: FOOTER (NORMALISÉ) --- */
+        .footer-section {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 40px 20px; /* Espace raisonnable, ni trop ni trop peu */
+            text-align: center;
+            z-index: 3;
+            font-size: 1rem; /* Taille de police normale */
+            line-height: 1.6;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer-section h1 {
+            font-size: 1.8rem;
+            font-weight: 400; /* Police fine et élégante */
+            margin-bottom: 25px;
+            color: #fff;
+            letter-spacing: 1px;
+            text-transform: uppercase; /* Optionnel : pour un effet plus moderne */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            display: inline-block; /* Pour que la bordure ne fasse que la largeur du texte */
+        }
+
+        .footer-contact {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px; /* Espace aéré entre les éléments */
+            margin-bottom: 30px;
+        }
+                /* Texte d'appel à l'action dans le footer */
+        .footer-cta-text {
+            font-size: 0.95rem;
+            color: #bdc3c7; /* Gris clair pour le texte secondaire */
+            margin-bottom: 30px;
+            max-width: 700px; /* Limite la largeur pour ne pas que ça s'étale trop */
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .footer-cta-text strong {
+            color: #fff; /* Met en gras les mots clés en blanc pour les faire ressortir */
+            font-weight: 500;
+        }
+
+        .footer-contact a, .footer-contact span {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-contact a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-social {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
+        }
+
+        .footer-social a {
+            color: var(--footer-text);
+            font-size: 1rem;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.2rem; }
+            .section-title { font-size: 2rem; }
+            .grid-cards { grid-template-columns: 1fr; }
+            .location-badge { bottom: 20px; right: 20px; font-size: 0.85rem; }
+            
+            .footer-contact {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1: HERO -->
+    <section class="hero-section">
+        <div class="location-badge">
+            📍 <i>Domaine de Beaurepaire, Château de Martinvast, 50690 Manche</i>
+        </div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">Les Gardiens de Beaurepaire</h1>
+            <p class="hero-desc">
+                Association pour le partage dans un domaine riche en histoire
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION 2: ACTIONS -->
+    <section class="actions-section">
+        <div class="actions-container">
+            <h2 class="section-title">Nos Axes d'Action</h2>
+            
+            <div class="grid-cards">
+                <div class="card">
+                    <span class="card-icon">🤝</span>
+                    <h3>Partage</h3>
+                    <p>Transmission de savoir-faire variés (bricolage, jardinage, créations, ...). <br> Chaque activité implique au moins un tuteur membre de l'association.</p>
+                </div>
+
+                <div class="card">
+                    <span class="card-icon">🏰</span>
+                    <h3>Conservation</h3>
+                    <p>Nos actions participent à la préservation du Château de Martinvast et de son domaine. <br> Nous collaborons avec la <a href="https://epopee-des-sens.fr">SAS Domaine de Beaurepaire</a>.</p>
+                </div>
+            
+                <div class="card">
+                    <span class="card-icon">🎭</span>
+                    <h3>Évènements</h3>
+                    <p>Mise en place d'animations accueillant du public (ateliers, marchés, sports, culture, ...). <br> Ponctuelles ou régulières, ces rencontres ouvrent et valorisent ce grand espace.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: FOOTER (NORMALISÉ) -->
+    <footer class="footer-section">
+        <div class="footer-content">
+            <h1>Contactez-nous</h1>
+
+            <!-- Texte explicatif -->
+            <p class="footer-cta-text">
+                Vous souhaitez nous soutenir ? Contactez-nous pour <strong>faire un don</strong> ou <strong>devenir membre</strong>.
+            </p>
+
+            <!-- Coordonnées principales -->
+            <div class="footer-contact">
+                <span>📍 Domaine de Beaurepaire, Château de Martinvast, 50690 Manche</span>
+                <span>•</span>
+                <a href="tel:+33123456789">01 23 45 67 89</a>
+                <span>•</span>
+                <a href="mailto:contact@asso-france.org">lesgardiensdebeaurepaire@gmail.com</a>
+            </div>
+
+            <!-- Réseaux sociaux -->
+            <div class="footer-social">
+                <a href="https://facebook.com/votrepage" target="_blank">Facebook</a>
+                <a href="#" target="_blank">Instagram</a>
+                <a href="#" target="_blank">Twitter</a>
+            </div>
+
+            <div class="copyright">
+                &copy; 2026 Gardiens de Beaurepaire. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
